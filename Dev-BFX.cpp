@@ -1942,15 +1942,13 @@ ProgramData loadProgram(const std::string& filename) {
         bool inCommentBlock = false;
         
         while (std::getline(file, line)) {
+        	data.original += line + "\n";
             // 跳过文件头部的注释块
             if (line.find("/* Brainfuck Program with Comments */") != std::string::npos ||
                 line.find("/* Saved from Brainfuck IDE */") != std::string::npos ||
                 line.find("/* Filtered executable code: */") != std::string::npos) {
                 continue;
             }
-            
-            // 添加非注释行到原始数据
-            data.original += line + "\n";
             
             // 如果是注释行，跳过
             if (line.length() >= 2 && line.substr(0, 2) == "/*") {
